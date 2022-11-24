@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <title>HOME</title>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg bg-light">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">Mylogin</a>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="#">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link disabled" sec:authentication="principal.username">Disabled</a>
+                </li>
+            </ul>
+        </div>
+        <div>
+            <li class="nav-item" sec:authorize="isAuthenticated()">
+                <a th:href="@{/logout}">Cerrar sesión</a>
+            </li>
+        </div>
+    </div>
+</nav>
+
+<hr>
+
+    <div class="container">
+        <h1>Registro e inicio de sesión</h1>
+        Bienvenido-<spam sec:authentication="principal.username"></spam>
+        <hr>
+        <h5>Tecnologias utilizadas:</h5>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">Springboot</li>
+            <li class="list-group-item">Springsecurity</li>
+            <li class="list-group-item">Hibernate</li>
+            <li class="list-group-item">Thymeleaf</li>
+            <li class="list-group-item">Mysql(MariaDb)</li>
+            <li class="list-group-item">Bootstrap</li>
+        </ul>
+        <hr>
+        <hr>
+
+        <table class="table table-striped table-bordered">
+            <thead class="table-dark">
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                    <th>Email</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="usuario : ${usuarios}">
+                    <td th:text="${usuario.id}">ID</td>
+                    <td th:text="${usuario.nombre}">Nombre</td>
+                    <td th:text="${usuario.apellido}">Apellido</td>
+                    <td th:text="${usuario.email}">Email</td>
+                </tr>
+            </tbody>
+        </table>
+    </div><br><br>
+
+
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</body>
+</html>
